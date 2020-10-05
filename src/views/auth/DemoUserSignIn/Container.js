@@ -2,30 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import View from './View';
 import Controllers from '../../../controllers/Controllers';
+import roles from '../../../data/roles';
 
 const Model = (props) => {
-  const roles = [
-    {
-      title: 'Admin',
-      email: 'admin-demo@bug.com',
-      password: 'anypass'
-    },
-    {
-      title: 'Tester',
-      email: 'tester-demo@bug.com',
-      password: 'anypass'
-    },
-    {
-      title: 'Project Manager',
-      email: 'projectManager-demo@bug.com',
-      password: 'anypass'
-    },
-    {
-      title: 'Developer',
-      email: 'developer-demo@bug.com',
-      password: 'anypass'
-    }
-  ];
   const [roleIndex, setRoleState] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
@@ -11,9 +11,10 @@ import {
   Link,
   TextField,
   Typography,
-  makeStyles
+  makeStyles, CircularProgress, MenuItem
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import { object } from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RegisterView = () => {
+const RegisterView = (props) => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  const { model } = props;
 
   return (
     <Page
@@ -54,11 +55,12 @@ const RegisterView = () => {
                 firstName: Yup.string().max(255).required('First name is required'),
                 lastName: Yup.string().max(255).required('Last name is required'),
                 password: Yup.string().max(255).required('password is required'),
-                policy: Yup.boolean().oneOf([true], 'This field must be checked')
+                policy: Yup.boolean().oneOf([true], 'This field must be checked'),
+                role: Yup.number().required('Please make a selection')
               })
             }
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+            onSubmit={(values) => {
+              model.handleSignupSubmit(values);
             }}
           >
             {({
@@ -110,6 +112,23 @@ const RegisterView = () => {
                   value={values.lastName}
                   variant="outlined"
                 />
+                <TextField
+                  error={Boolean(touched.role && errors.role)}
+                  select
+                  fullWidth
+                  helperText={touched.role && errors.role}
+                  label="Role"
+                  name="role"
+                  margin="normal"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.role}
+                  variant="outlined"
+                >
+                  {model.roles.map((role, index) => (
+                    <MenuItem key={role.title} value={index}>{role.title}</MenuItem>
+                  ))}
+                </TextField>
                 <TextField
                   error={Boolean(touched.email && errors.email)}
                   fullWidth
@@ -169,16 +188,20 @@ const RegisterView = () => {
                   </FormHelperText>
                 )}
                 <Box my={2}>
-                  <Button
-                    color="primary"
-                    disabled={isSubmitting}
-                    fullWidth
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                  >
-                    Sign up now
-                  </Button>
+                  {model.loading
+                    ? <CircularProgress size="1em" />
+                    : (
+                      <Button
+                        color="primary"
+                        disabled={isSubmitting}
+                        fullWidth
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                      >
+                        Sign up now
+                      </Button>
+                    )}
                 </Box>
                 <Typography
                   color="textSecondary"
@@ -201,6 +224,10 @@ const RegisterView = () => {
       </Box>
     </Page>
   );
+};
+
+RegisterView.propTypes = {
+  model: object
 };
 
 export default RegisterView;

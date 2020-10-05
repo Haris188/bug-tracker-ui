@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Container,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import { object } from 'prop-types';
 import Results from './Results';
 import Toolbar from './Toolbar';
-import data from './data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,23 +18,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CustomerListView = () => {
+const View = (props) => {
   const classes = useStyles();
-  const [customers] = useState(data);
+  const { container } = props;
 
   return (
     <Page
       className={classes.root}
-      title="Customers"
+      title="Tickets"
     >
       <Container maxWidth={false}>
-        <Toolbar />
+        <Toolbar
+          handleFindChange={container.searchName}
+        />
         <Box mt={3}>
-          <Results customers={customers} />
+          <Results
+            tickets={container.tickets}
+            handleTicketClick = {container.handleTicketClick}
+          />
         </Box>
       </Container>
     </Page>
   );
 };
 
-export default CustomerListView;
+View.propTypes = {
+  container: object
+};
+
+export default View;

@@ -1,3 +1,3 @@
-import Model from './Model';
+import Container from './Container';
 
-export default Model;
+export default Container;
