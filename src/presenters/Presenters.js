@@ -61,9 +61,9 @@ const getAllProjects = async () => {
   };
 };
 
-const getCurrentUserTickets = ()=>{
+const getCurrentUserTickets = () => {
   return {
-    success:true,
+    success: true,
     data: [
       {
         id: uuid(),
@@ -120,11 +120,50 @@ const getCurrentUserTickets = ()=>{
         completed: false
       }
     ]
-  }
-}
+  };
+};
+
+const getImagesForTicket = async (id) => {
+  console.log(id);
+  return {
+    success: true,
+    data: [
+      'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
+      'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
+      'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
+      'https://homepages.cae.wisc.edu/~ece533/images/boat.png'
+    ]
+  };
+};
+
+const getCommentsForTicket = (ticketId) => {
+  console.log(ticketId);
+  return {
+    success: true,
+    data: [
+      {
+        id: 1,
+        text: 'Did you try factory pattern?',
+        userName: 'Brian'
+      },
+      {
+        id: 1,
+        text: 'Did you try factory pattern?',
+        userName: 'Brian'
+      },
+      {
+        id: 1,
+        text: 'Did you try factory pattern?',
+        userName: 'Brian'
+      }
+    ]
+  };
+};
 
 export default {
   getAllUsers,
   getAllProjects,
-  getCurrentUserTickets
+  getCurrentUserTickets,
+  getImagesForTicket,
+  getCommentsForTicket
 };
