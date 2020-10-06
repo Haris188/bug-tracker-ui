@@ -5,10 +5,18 @@ import Presenters from 'src/presenters/Presenters';
 import LoadingView from 'src/views/loadingView';
 import View from './View';
 
+const dummyUser = {
+  currentUser: {
+    id: 1,
+    role: 'admin'
+  }
+};
+
 const Container = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {currentUser} = dummyUser;
 
   const getProjectsFromApi = async () => {
     const projectsResult = await
@@ -45,6 +53,10 @@ const Container = () => {
     navigate('/app/project', { state: { project } });
   };
 
+  const navigateToAddProject = () => {
+    navigate('/app/addproject', { replace: true });
+  };
+
   return loading
     ? <LoadingView />
     : (
@@ -53,7 +65,9 @@ const Container = () => {
           projects,
           deleteProject,
           navigateToProject,
-          navigateToDetails
+          navigateToDetails,
+          navigateToAddProject,
+          currentUser
         }}
       />
     );

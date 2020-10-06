@@ -56,6 +56,22 @@ const deleteTicket = (ticketId) => {
   };
 };
 
+const addNewProject = (data) => {
+  // TODO: Make sure the api for this
+  // endpoing returns the project in data,
+  // if 
+  // saving project is successful
+
+  return {
+    success: true,
+    data: {
+      id: '234',
+      name: 'bobi project',
+      description: 'A new project'
+    }
+  };
+};
+
 export default {
   signin,
   signup,
@@ -63,5 +79,6 @@ export default {
   deleteProject,
   attachImgToTicket,
   addCommentToTicket,
-  deleteTicket
+  deleteTicket,
+  addNewProject
 };

@@ -5,7 +5,7 @@ import LoadingView from 'src/views/loadingView';
 import View from './View';
 
 const dummyUser = {
-  user: {
+  currentUser: {
     id: 1,
     role: 'tester'
   }
@@ -15,7 +15,7 @@ const Container = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { ticket } = location.state;
-  const { user } = dummyUser;
+  const { currentUser } = dummyUser;
   const [loading, setLoading] = useState(false);
 
   const deleteThisTicket = async () => {
@@ -39,7 +39,7 @@ const Container = (props) => {
         {...props}
         container={{
           ticket,
-          user,
+          currentUser,
           deleteThisTicket
         }}
       />
