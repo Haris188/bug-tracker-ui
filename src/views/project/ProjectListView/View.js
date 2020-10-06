@@ -22,6 +22,7 @@ const View = (props) => {
               projects={container.projects}
               deleteProject={container.deleteProject}
               navigateToProject={container.navigateToProject}
+              navigateToDetails={container.navigateToDetails}
             />
           )
           : (

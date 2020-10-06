@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { filter } from 'lodash';
 import View from './View';
 import LoadingView from '../../loadingView';
@@ -7,12 +7,14 @@ import Presenters from '../../../presenters/Presenters';
 
 const Container = (props) => {
   const navigate = useNavigate();
+  const location = useLocation()
   const [Tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filteredTickets, setFilteredTickets] = useState([]);
+  const { project } = location.state;
 
   const getTicketsFromApi = async () => {
-    const ticketResponse = await Presenters.getCurrentUserTickets();
+    const ticketResponse = await Presenters.getCurrentUserTickets(project.id);
     if (ticketResponse.success) {
       setTickets(ticketResponse.data);
       setFilteredTickets(ticketResponse.data);
@@ -62,7 +64,8 @@ const Container = (props) => {
         container={{
           tickets: filteredTickets,
           searchName,
-          handleTicketClick
+          handleTicketClick,
+          project
         }}
       />
     );

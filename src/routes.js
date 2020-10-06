@@ -12,6 +12,7 @@ import RegisterView from 'src/views/auth/Register';
 import SettingsView from 'src/views/settings/SettingsView';
 import TicketListView from 'src/views/ticket/TicketListView';
 import TicketView from 'src/views/ticket/TicketView';
+import ProjectView from 'src/views/project/ProjectView';
 
 const routes = [
   {
@@ -21,6 +22,7 @@ const routes = [
       { path: 'account', element: <AccountView /> },
       { path: 'customers', element: <CustomerListView /> },
       { path: 'dashboard', element: <DashboardView /> },
+      { path: 'project', element: <ProjectView /> },
       { path: 'projects', element: <ProjectListView /> },
       { path: 'projects/project', element: <TicketListView /> },
       { path: 'ticket', element: <TicketView /> },

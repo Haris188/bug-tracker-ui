@@ -41,6 +41,10 @@ const Container = () => {
     navigate('/app/projects/project', { state: { project } });
   };
 
+  const navigateToDetails = (project) => {
+    navigate('/app/project', { state: { project } });
+  };
+
   return loading
     ? <LoadingView />
     : (
@@ -48,7 +52,8 @@ const Container = () => {
         container={{
           projects,
           deleteProject,
-          navigateToProject
+          navigateToProject,
+          navigateToDetails
         }}
       />
     );

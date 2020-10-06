@@ -6,7 +6,8 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemSecondaryAction,
-  IconButton
+  IconButton,
+  Link
 } from '@material-ui/core';
 import {
   Delete
@@ -24,7 +25,8 @@ const ProjectListItem = (props) => {
   const {
     project,
     deleteProject,
-    navigateToProject
+    navigateToProject,
+    navigateToDetails
   } = props;
 
   return (
@@ -81,7 +83,8 @@ const ProjectListItem = (props) => {
 ProjectListItem.propTypes = {
   project: object,
   deleteProject: func,
-  navigateToProject: func
+  navigateToProject: func,
+  navigateToDetails: func
 };
 
 export default ProjectListItem;

@@ -9,7 +9,8 @@ const ProjectList = (props) => {
   const {
     projects,
     deleteProject,
-    navigateToProject
+    navigateToProject,
+    navigateToDetails
   } = props;
   return (
     <List>
@@ -18,6 +19,7 @@ const ProjectList = (props) => {
           project={project}
           deleteProject={deleteProject}
           navigateToProject={navigateToProject}
+          navigateToDetails={navigateToDetails}
         />
       ))}
     </List>
@@ -27,7 +29,8 @@ const ProjectList = (props) => {
 ProjectList.propTypes = {
   projects: object,
   deleteProject: func,
-  navigateToProject: func
+  navigateToProject: func,
+  navigateToDetails:func
 };
 
 export default ProjectList;

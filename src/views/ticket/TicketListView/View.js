@@ -2,10 +2,13 @@ import React from 'react';
 import {
   Box,
   Container,
+  Grid,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import { object } from 'prop-types';
+import ProjectDetails from 'src/views/project/ProjectDetails';
+import ProjectPeople from 'src/views/project/ProjectPeople';
 import Results from './Results';
 import Toolbar from './Toolbar';
 
@@ -28,13 +31,25 @@ const View = (props) => {
       title="Tickets"
     >
       <Container maxWidth={false}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <ProjectDetails
+              project={container.project}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <ProjectPeople
+              project={container.project}
+            />
+          </Grid>
+        </Grid>
         <Toolbar
           handleFindChange={container.searchName}
         />
         <Box mt={3}>
           <Results
             tickets={container.tickets}
-            handleTicketClick = {container.handleTicketClick}
+            handleTicketClick={container.handleTicketClick}
           />
         </Box>
       </Container>

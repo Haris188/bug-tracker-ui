@@ -61,7 +61,7 @@ const getAllProjects = async () => {
   };
 };
 
-const getCurrentUserTickets = () => {
+const getCurrentUserTickets = (projectId) => {
   return {
     success: true,
     data: [
@@ -160,10 +160,43 @@ const getCommentsForTicket = (ticketId) => {
   };
 };
 
+const getProjectUsersFromApi = async (projectId)=>{
+  return {
+    success: true,
+    data: [
+      {
+        id: 1,
+        name: 'Haris',
+        email: 'haris@gmail.com',
+        role: 'developer'
+      },
+      {
+        id: 1,
+        name: 'Haris',
+        email: 'haris@gmail.com',
+        role: 'developer'
+      },
+      {
+        id: 1,
+        name: 'Haris',
+        email: 'haris@gmail.com',
+        role: 'developer'
+      },
+      {
+        id: 1,
+        name: 'Niaomi',
+        email: 'naiomi@gmail.com',
+        role: 'Project Manager'
+      }
+    ]
+  };
+};
+
 export default {
   getAllUsers,
   getAllProjects,
   getCurrentUserTickets,
   getImagesForTicket,
-  getCommentsForTicket
+  getCommentsForTicket,
+  getProjectUsersFromApi
 };
