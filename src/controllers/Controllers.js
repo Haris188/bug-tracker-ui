@@ -49,11 +49,19 @@ const addCommentToTicket = (commentData) => {
   };
 };
 
+const deleteTicket = (ticketId) => {
+  return {
+    success: true,
+    data: null
+  };
+};
+
 export default {
   signin,
   signup,
   deleteUser,
   deleteProject,
   attachImgToTicket,
-  addCommentToTicket
+  addCommentToTicket,
+  deleteTicket
 };

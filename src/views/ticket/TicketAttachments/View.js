@@ -18,6 +18,11 @@ const Image = styled.img`
   height: 140px;
   margin-right:0.5em;
   margin-top: 0.5em;
+  transition: box-shadow 0.2s ease-in;
+  &:hover{
+    cursor:pointer;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  }
 `;
 
 const View = (props) => {

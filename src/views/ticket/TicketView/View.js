@@ -7,13 +7,20 @@ import {
 import TicketInfo from './TicketInfo';
 import TicketComments from '../TicketComments';
 import TicketAttachments from '../TicketAttachments';
+import TicketMenu from './TicketMenu';
 
 const View = (props) => {
   const { container } = props;
 
   return (
-    <Container style={{marginTop:'1em'}}>
+    <Container style={{ marginTop: '1em' }}>
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TicketMenu
+            user={container.user}
+            handleDelete={container.deleteThisTicket}
+          />
+        </Grid>
         <Grid item xs={12} md={6}>
           <TicketInfo
             ticket={container.ticket}
