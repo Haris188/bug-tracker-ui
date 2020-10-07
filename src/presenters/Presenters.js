@@ -160,12 +160,12 @@ const getCommentsForTicket = (ticketId) => {
   };
 };
 
-const getProjectUsersFromApi = async (projectId)=>{
+const getProjectUsersFromApi = async (projectId) => {
   return {
     success: true,
     data: [
       {
-        id: 234,
+        id: "234",
         name: 'Haris',
         email: 'haris@gmail.com',
         role: 'developer'
@@ -192,11 +192,43 @@ const getProjectUsersFromApi = async (projectId)=>{
   };
 };
 
+const getAllBugStats = async () => {
+  return {
+    success: true,
+    data: {
+      fixed: 80,
+      notFixed: 20,
+      lowPriorityTickets: 30,
+      mediumPriorityTickets: 200,
+      highPriorityTickets: 130
+    }
+  };
+};
+
+const getCurrentUser = async () => {
+  // TODO: Make sure to put loggenIn
+  // key in returned object, even if the user
+  // is not logged in
+
+  return {
+    success: true,
+    data: {
+      id: 1,
+      name: 'Haris',
+      email: 'haris@gmail.com',
+      role: 'admin',
+      loggedIn: true
+    }
+  };
+};
+
 export default {
   getAllUsers,
   getAllProjects,
   getCurrentUserTickets,
   getImagesForTicket,
   getCommentsForTicket,
-  getProjectUsersFromApi
+  getProjectUsersFromApi,
+  getAllBugStats,
+  getCurrentUser
 };

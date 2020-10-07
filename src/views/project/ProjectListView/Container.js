@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Controllers from 'src/controllers/Controllers';
 import Presenters from 'src/presenters/Presenters';
 import LoadingView from 'src/views/loadingView';
+import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 
 const dummyUser = {
@@ -16,7 +17,7 @@ const Container = () => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {currentUser} = dummyUser;
+  const { currentUser } = dummyUser;
 
   const getProjectsFromApi = async () => {
     const projectsResult = await
@@ -73,4 +74,10 @@ const Container = () => {
     );
 };
 
-export default Container;
+const ContainerGate = () => (
+  <WithAuthGate>
+    {Container}
+  </WithAuthGate>
+);
+
+export default ContainerGate;

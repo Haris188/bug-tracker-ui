@@ -1,5 +1,6 @@
 import { object } from 'prop-types';
 import React from 'react';
+import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 
 const Container = (props) => {

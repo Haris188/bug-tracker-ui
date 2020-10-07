@@ -9,13 +9,15 @@ import {
   CardHeader,
   Divider,
   Typography,
-  colors,
   makeStyles,
-  useTheme
+  useTheme,
+  colors
 } from '@material-ui/core';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import PhoneIcon from '@material-ui/icons/Phone';
-import TabletIcon from '@material-ui/icons/Tablet';
+
+import {
+  BugReport,
+  Done
+} from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,26 +25,13 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const TrafficByDevice = ({ className, ...rest }) => {
+const TrafficByDevice = ({
+  className,
+  bugStats,
+  ...rest
+}) => {
   const classes = useStyles();
   const theme = useTheme();
-
-  const data = {
-    datasets: [
-      {
-        data: [63, 15, 22],
-        backgroundColor: [
-          colors.indigo[500],
-          colors.red[600],
-          colors.orange[600]
-        ],
-        borderWidth: 8,
-        borderColor: colors.common.white,
-        hoverBorderColor: colors.common.white
-      }
-    ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
-  };
 
   const options = {
     animation: false,
@@ -66,24 +55,34 @@ const TrafficByDevice = ({ className, ...rest }) => {
     }
   };
 
-  const devices = [
+  const data = {
+    datasets: [
+      {
+        data: [bugStats.fixed, bugStats.notFixed],
+        backgroundColor: [
+          colors.indigo[500],
+          colors.red[600],
+        ],
+        borderWidth: 8,
+        borderColor: colors.common.white,
+        hoverBorderColor: colors.common.white
+      }
+    ],
+    labels: ['Fixed', 'Not Fixed']
+  };
+
+  const bugStatsData = [
     {
-      title: 'Desktop',
-      value: 63,
-      icon: LaptopMacIcon,
+      title: 'Fixed',
+      value: bugStats.fixed,
+      icon: Done,
       color: colors.indigo[500]
     },
     {
-      title: 'Tablet',
-      value: 15,
-      icon: TabletIcon,
+      title: 'Not Fixed',
+      value: bugStats.notFixed,
+      icon: BugReport,
       color: colors.red[600]
-    },
-    {
-      title: 'Mobile',
-      value: 23,
-      icon: PhoneIcon,
-      color: colors.orange[600]
     }
   ];
 
@@ -92,7 +91,7 @@ const TrafficByDevice = ({ className, ...rest }) => {
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <CardHeader title="Traffic by Device" />
+      <CardHeader title="Bug Circle" />
       <Divider />
       <CardContent>
         <Box
@@ -109,7 +108,7 @@ const TrafficByDevice = ({ className, ...rest }) => {
           justifyContent="center"
           mt={2}
         >
-          {devices.map(({
+          {bugStatsData.map(({
             color,
             icon: Icon,
             title,
@@ -143,7 +142,8 @@ const TrafficByDevice = ({ className, ...rest }) => {
 };
 
 TrafficByDevice.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  bugStats: PropTypes.object
 };
 
 export default TrafficByDevice;

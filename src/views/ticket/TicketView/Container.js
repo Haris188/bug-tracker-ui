@@ -4,6 +4,7 @@ import Controllers from 'src/controllers/Controllers';
 import Presenters from 'src/presenters/Presenters';
 import LoadingView from 'src/views/loadingView';
 import { find } from 'lodash';
+import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 
 const dummyUser = {
@@ -97,4 +98,10 @@ const Container = (props) => {
     );
 };
 
-export default Container;
+const ContainerGate = () => (
+  <WithAuthGate>
+    {Container}
+  </WithAuthGate>
+);
+
+export default ContainerGate;

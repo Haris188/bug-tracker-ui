@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { filter } from 'lodash';
+import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 import LoadingView from '../../loadingView';
 import Controllers from '../../../controllers/Controllers';
@@ -63,4 +64,10 @@ const Container = (props) => {
     );
 };
 
-export default Container;
+const ContainerGate = () => (
+  <WithAuthGate>
+    {Container}
+  </WithAuthGate>
+);
+
+export default ContainerGate;

@@ -24,24 +24,6 @@ const user = {
   name: 'Katarina Smith'
 };
 
-const items = [
-  {
-    href: '/app/dashboard',
-    icon: BarChartIcon,
-    title: 'Dashboard'
-  },
-  {
-    href: '/app/customers',
-    icon: UsersIcon,
-    title: 'Users'
-  },
-  {
-    href: '/app/projects',
-    icon: ShoppingBagIcon,
-    title: 'Projects'
-  },
-];
-
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
     width: 256
@@ -58,9 +40,29 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const NavBar = ({ onMobileClose, openMobile }) => {
+const NavBar = ({ currentUser, onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
+  const items = [
+    {
+      href: '/app/dashboard',
+      icon: BarChartIcon,
+      title: 'Dashboard',
+      show: true
+    },
+    {
+      href: '/app/customers',
+      icon: UsersIcon,
+      title: 'Users',
+      show: currentUser.role === 'admin'
+    },
+    {
+      href: '/app/projects',
+      icon: ShoppingBagIcon,
+      title: 'Projects',
+      show: true
+    },
+  ];
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -81,24 +83,21 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         flexDirection="column"
         p={2}
       >
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          src={user.avatar}
-          to="/app/account"
-        />
+        <Avatar>
+          {currentUser.name[0]}
+        </Avatar>
         <Typography
           className={classes.name}
           color="textPrimary"
           variant="h5"
         >
-          {user.name}
+          {currentUser.name}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body2"
         >
-          {user.jobTitle}
+          {currentUser.role}
         </Typography>
       </Box>
       <Divider />
@@ -110,6 +109,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               key={item.title}
               title={item.title}
               icon={item.icon}
+              show={item.show}
             />
           ))}
         </List>
@@ -147,7 +147,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
 
 NavBar.propTypes = {
   onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
+  openMobile: PropTypes.bool,
+  currentUser: PropTypes.object
 };
 
 NavBar.defaultProps = {

@@ -45,41 +45,45 @@ const NavItem = ({
   href,
   icon: Icon,
   title,
+  show,
   ...rest
 }) => {
   const classes = useStyles();
 
-  return (
-    <ListItem
-      className={clsx(classes.item, className)}
-      disableGutters
-      {...rest}
-    >
-      <Button
-        activeClassName={classes.active}
-        className={classes.button}
-        component={RouterLink}
-        to={href}
+  return show
+    ? (
+      <ListItem
+        className={clsx(classes.item, className)}
+        disableGutters
+        {...rest}
       >
-        {Icon && (
+        <Button
+          activeClassName={classes.active}
+          className={classes.button}
+          component={RouterLink}
+          to={href}
+        >
+          {Icon && (
           <Icon
             className={classes.icon}
             size="20"
           />
-        )}
-        <span className={classes.title}>
-          {title}
-        </span>
-      </Button>
-    </ListItem>
-  );
+          )}
+          <span className={classes.title}>
+            {title}
+          </span>
+        </Button>
+      </ListItem>
+    )
+    : <></>;
 };
 
 NavItem.propTypes = {
   className: PropTypes.string,
   href: PropTypes.string,
   icon: PropTypes.elementType,
-  title: PropTypes.string
+  title: PropTypes.string,
+  show: PropTypes.bool
 };
 
 export default NavItem;

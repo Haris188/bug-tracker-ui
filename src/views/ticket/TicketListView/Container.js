@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { filter } from 'lodash';
+import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 import LoadingView from '../../loadingView';
 import Presenters from '../../../presenters/Presenters';
@@ -76,4 +77,10 @@ const Container = (props) => {
     );
 };
 
-export default Container;
+const ContainerGate = () => (
+  <WithAuthGate>
+    {Container}
+  </WithAuthGate>
+);
+
+export default ContainerGate;

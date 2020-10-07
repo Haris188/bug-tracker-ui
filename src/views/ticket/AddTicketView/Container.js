@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Controllers from 'src/controllers/Controllers';
 import Presenters from 'src/presenters/Presenters';
 import LoadingView from 'src/views/loadingView';
+import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 
 const priorities = [
@@ -75,4 +76,10 @@ const Container = () => {
     );
 };
 
-export default Container;
+const ContainerGate = () => (
+  <WithAuthGate>
+    {Container}
+  </WithAuthGate>
+);
+
+export default ContainerGate;

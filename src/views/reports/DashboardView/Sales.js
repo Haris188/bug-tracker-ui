@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -13,14 +12,16 @@ import {
   makeStyles,
   colors
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Sales = ({ className, ...rest }) => {
+const Sales = ({
+  className,
+  bugStats,
+  ...rest
+}) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -28,21 +29,20 @@ const Sales = ({ className, ...rest }) => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20],
-        label: 'This year'
-      },
-      {
-        backgroundColor: colors.grey[200],
-        data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Last year'
+        data: [
+          bugStats.lowPriorityTickets,
+          bugStats.mediumPriorityTickets,
+          bugStats.highPriorityTickets
+        ],
+        label: 'Tickets'
       }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug']
+    labels: ['Low', 'Medium', 'High']
   };
 
   const options = {
     animation: false,
-    cornerRadius: 20,
+    cornerRadius: 5,
     layout: { padding: 0 },
     legend: { display: false },
     maintainAspectRatio: false,
@@ -50,8 +50,8 @@ const Sales = ({ className, ...rest }) => {
     scales: {
       xAxes: [
         {
-          barThickness: 12,
-          maxBarThickness: 10,
+          barThickness: 40,
+          maxBarThickness: 40,
           barPercentage: 0.5,
           categoryPercentage: 0.5,
           ticks: {
@@ -101,16 +101,7 @@ const Sales = ({ className, ...rest }) => {
       {...rest}
     >
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon />}
-            size="small"
-            variant="text"
-          >
-            Last 7 days
-          </Button>
-        )}
-        title="Latest Sales"
+        title="Tickets"
       />
       <Divider />
       <CardContent>
@@ -129,22 +120,14 @@ const Sales = ({ className, ...rest }) => {
         display="flex"
         justifyContent="flex-end"
         p={2}
-      >
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-        >
-          Overview
-        </Button>
-      </Box>
+      />
     </Card>
   );
 };
 
 Sales.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  bugStats: PropTypes.object
 };
 
 export default Sales;

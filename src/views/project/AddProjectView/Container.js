@@ -3,6 +3,7 @@ import Controllers from 'src/controllers/Controllers';
 import Presenters from 'src/presenters/Presenters';
 import { useNavigate } from 'react-router-dom';
 import { filter } from 'lodash';
+import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 
 const Container = () => {
@@ -90,4 +91,10 @@ const Container = () => {
   );
 };
 
-export default Container;
+const ContainerGate = () => (
+  <WithAuthGate>
+    {Container}
+  </WithAuthGate>
+);
+
+export default ContainerGate;

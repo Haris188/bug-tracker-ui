@@ -68,7 +68,6 @@ const TicketInfo = (props) => {
             touched,
             values,
             handleBlur,
-            isSubmitting,
           }) => (
             <form onSubmit={handleSubmit}>
               <Typography

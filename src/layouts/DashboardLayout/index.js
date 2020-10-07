@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
+import WithAuthGate from 'src/components/WithAuthGate';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,9 +34,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const DashboardLayout = () => {
+const DashboardLayout = (props) => {
   const classes = useStyles();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  const {currentUser} = props;
 
   return (
     <div className={classes.root}>
@@ -43,6 +45,7 @@ const DashboardLayout = () => {
       <NavBar
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}
+        currentUser={currentUser}
       />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
@@ -55,4 +58,10 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+const DashboardLayoutGate = ()=>(
+  <WithAuthGate>
+    {DashboardLayout}
+  </WithAuthGate>
+);
+
+export default DashboardLayoutGate;
