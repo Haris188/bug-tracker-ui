@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Controllers from 'src/controllers/Controllers';
+import Presenters from 'src/presenters/Presenters';
 import LoadingView from 'src/views/loadingView';
+import { find } from 'lodash';
 import View from './View';
 
 const dummyUser = {
@@ -16,7 +18,33 @@ const Container = (props) => {
   const navigate = useNavigate();
   const { ticket } = location.state;
   const { currentUser } = dummyUser;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState([]);
+  const [newUserSubmitLoading, setNewUserSubmitLoading] = useState(false);
+
+  const getProjectUsersFromApi = async () => {
+    const userRes = await
+    Presenters.getProjectUsersFromApi(ticket.projectId);
+
+    if (userRes.success) {
+      setUsers(userRes.data);
+    } else {
+      alert('Invalid ticket');
+    }
+    setLoading(false);
+  };
+
+  const setAssignedUser = () => {
+    if (users.length > 0) {
+      return find(users, { id: ticket.userId });
+    }
+  };
+
+  const currentlyAssingedUser = setAssignedUser();
+
+  useEffect(() => {
+    getProjectUsersFromApi();
+  }, []);
 
   const deleteThisTicket = async () => {
     setLoading(true);
@@ -32,6 +60,25 @@ const Container = (props) => {
     }
   };
 
+  const changeTicketUser = async (values) => {
+    setNewUserSubmitLoading(true);
+    const userId = users[values.user].id;
+    const data = {
+      userId,
+      ticketId: ticket.id
+    };
+
+    const changeRes = await
+    Controllers.assignUserToTicket(data);
+
+    if (changeRes.success) {
+      alert('Assigned user changed');
+    } else {
+      alert('Failed to assing user');
+    }
+    setNewUserSubmitLoading(false);
+  };
+
   return loading
     ? <LoadingView />
     : (
@@ -40,7 +87,11 @@ const Container = (props) => {
         container={{
           ticket,
           currentUser,
-          deleteThisTicket
+          deleteThisTicket,
+          users,
+          changeTicketUser,
+          currentlyAssingedUser,
+          newUserSubmitLoading
         }}
       />
     );

@@ -17,13 +17,17 @@ const View = (props) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TicketMenu
-            user={container.user}
+            user={container.currentUser}
             handleDelete={container.deleteThisTicket}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TicketInfo
             ticket={container.ticket}
+            users={container.users}
+            submitForm={container.changeTicketUser}
+            initialUser={container.currentlyAssingedUser}
+            newUserSubmitLoading={container.newUserSubmitLoading}
           />
         </Grid>
         <Grid item xs={12} md={6}>

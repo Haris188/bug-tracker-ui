@@ -70,7 +70,7 @@ const getCurrentUserTickets = (projectId) => {
         problem: 'Alert not working',
         description: 'When I click on it it wont open',
         priority: 'low',
-        userId: uuid(),
+        userId: 234,
         projectId: uuid(),
         completed: true
       },
@@ -165,7 +165,7 @@ const getProjectUsersFromApi = async (projectId)=>{
     success: true,
     data: [
       {
-        id: 1,
+        id: 234,
         name: 'Haris',
         email: 'haris@gmail.com',
         role: 'developer'

@@ -7,7 +7,7 @@ import Presenters from '../../../presenters/Presenters';
 
 const Container = (props) => {
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const [Tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filteredTickets, setFilteredTickets] = useState([]);
@@ -56,6 +56,10 @@ const Container = (props) => {
     navigate('/app/ticket', { state: { ticket }, replace: true });
   };
 
+  const navigateToNewTicket = () => {
+    navigate('/app/addticket', { state: { project } });
+  };
+
   return loading
     ? <LoadingView />
     : (
@@ -65,7 +69,8 @@ const Container = (props) => {
           tickets: filteredTickets,
           searchName,
           handleTicketClick,
-          project
+          project,
+          navigateToNewTicket
         }}
       />
     );

@@ -8,7 +8,7 @@ import {
   TextField,
   InputAdornment,
   SvgIcon,
-  makeStyles
+  makeStyles, Button
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 
@@ -22,7 +22,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Toolbar = ({ handleFindChange, className, ...rest }) => {
+const Toolbar = ({
+  navigateToNewTicket,
+  handleFindChange,
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
 
   return (
@@ -52,6 +57,14 @@ const Toolbar = ({ handleFindChange, className, ...rest }) => {
                 placeholder="Search Ticket"
                 variant="outlined"
               />
+              <Button
+                onClick={navigateToNewTicket}
+                color="primary"
+                variant="contained"
+                style={{ marginTop: '1em' }}
+              >
+                Add new Ticket
+              </Button>
             </Box>
           </CardContent>
         </Card>
@@ -62,7 +75,8 @@ const Toolbar = ({ handleFindChange, className, ...rest }) => {
 
 Toolbar.propTypes = {
   className: PropTypes.string,
-  handleFindChange: PropTypes.func
+  handleFindChange: PropTypes.func,
+  navigateToNewTicket: PropTypes.func
 };
 
 export default Toolbar;

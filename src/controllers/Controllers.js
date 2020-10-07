@@ -59,7 +59,7 @@ const deleteTicket = (ticketId) => {
 const addNewProject = (data) => {
   // TODO: Make sure the api for this
   // endpoing returns the project in data,
-  // if 
+  // if
   // saving project is successful
 
   return {
@@ -72,6 +72,32 @@ const addNewProject = (data) => {
   };
 };
 
+const addNewTicket = (data) => {
+  // TODO: Make sure the api for this
+  // endpoing returns the ticket in data,
+  // if
+  // saving ticket is successful
+
+  return {
+    success: true,
+    data: {
+      id: '234',
+      problem: 'No page openeing',
+      description: 'No description',
+      userId: '234',
+      projectId: '234',
+      completed: false
+    }
+  };
+};
+
+const assignUserToTicket = (data) => {
+  return {
+    success: true,
+    data: null
+  };
+};
+
 export default {
   signin,
   signup,
@@ -80,5 +106,7 @@ export default {
   attachImgToTicket,
   addCommentToTicket,
   deleteTicket,
-  addNewProject
+  addNewProject,
+  addNewTicket,
+  assignUserToTicket
 };

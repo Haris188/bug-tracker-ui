@@ -45,6 +45,7 @@ const View = (props) => {
         </Grid>
         <Toolbar
           handleFindChange={container.searchName}
+          navigateToNewTicket={container.navigateToNewTicket}
         />
         <Box mt={3}>
           <Results
