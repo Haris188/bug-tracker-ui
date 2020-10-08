@@ -51,6 +51,7 @@ const View = (props) => {
           <Results
             tickets={container.tickets}
             handleTicketClick={container.handleTicketClick}
+            completeTicket={container.completeTicket}
           />
         </Box>
       </Container>

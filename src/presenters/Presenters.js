@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
-import get from './get';
+import get from '../api/get';
+import post from '../api/post';
 
 const getAllUsers = async () => {
   const res = await
@@ -9,94 +10,15 @@ const getAllUsers = async () => {
 };
 
 const getAllProjects = async () => {
-  return {
-    success: true,
-    data: [
-      {
-        id: uuid(),
-        name: 'Online Doctors',
-        description: 'An app for doctors to check patients online',
-        bugs: 3,
-        fixed: 1,
-      },
-      {
-        id: uuid(),
-        name: 'Online Doctors',
-        description: 'An app for doctors to check patients online',
-        bugs: 3,
-        fixed: 1,
-      },
-      {
-        id: uuid(),
-        name: 'Online Doctors',
-        description: 'An app for doctors to check patients online',
-        bugs: 3,
-        fixed: 1,
-      }
-    ]
-  };
+  const res = await
+  get('/getAllProjectsForUser');
+  return res;
 };
 
-const getCurrentUserTickets = (projectId) => {
-  return {
-    success: true,
-    data: [
-      {
-        id: uuid(),
-        problem: 'Alert not working',
-        description: 'When I click on it it wont open',
-        priority: 'low',
-        userId: 234,
-        projectId: uuid(),
-        completed: true
-      },
-      {
-        id: uuid(),
-        problem: 'Alert not working',
-        description: 'When I click on it it wont open',
-        priority: 'low',
-        userId: uuid(),
-        projectId: uuid(),
-        completed: false
-      },
-      {
-        id: uuid(),
-        problem: 'Alert not working',
-        description: 'When I click on it it wont open',
-        priority: 'low',
-        userId: uuid(),
-        projectId: uuid(),
-        completed: true
-      },
-      {
-        id: uuid(),
-        problem: 'Alert not working',
-        description: 'When I click on it it wont open',
-        priority: 'low',
-        userId: uuid(),
-        projectId: uuid(),
-        completed: false
-      },
-      {
-        id: uuid(),
-        problem: 'Alert not working',
-        description: 'When I click on it it wont open',
-        priority: 'low',
-        userId: uuid(),
-        projectId: uuid(),
-        completed: false
-      },
-      {
-        id: uuid(),
-        problem: 'Test pending',
-        description: 'When I click on it it wont open',
-        priority: 'low',
-        userId: uuid(),
-        projectId: uuid(),
-        completed: false
-      }
-    ]
-  };
+const getCurrentUserTickets = async (projectId) => {
+  const res = await
+  post('/getCurrentUserTickets', { projectId });
+  return res;
 };
 
 const getImagesForTicket = async (id) => {
@@ -112,60 +34,16 @@ const getImagesForTicket = async (id) => {
   };
 };
 
-const getCommentsForTicket = (ticketId) => {
-  console.log(ticketId);
-  return {
-    success: true,
-    data: [
-      {
-        id: 1,
-        text: 'Did you try factory pattern?',
-        userName: 'Brian'
-      },
-      {
-        id: 1,
-        text: 'Did you try factory pattern?',
-        userName: 'Brian'
-      },
-      {
-        id: 1,
-        text: 'Did you try factory pattern?',
-        userName: 'Brian'
-      }
-    ]
-  };
+const getCommentsForTicket = async (ticketId) => {
+  const res = await
+  post('/getCommentsForTicket', { ticketId });
+  return res;
 };
 
 const getProjectUsersFromApi = async (projectId) => {
-  return {
-    success: true,
-    data: [
-      {
-        id: '234',
-        name: 'Haris',
-        email: 'haris@gmail.com',
-        role: 'developer'
-      },
-      {
-        id: 1,
-        name: 'Haris',
-        email: 'haris@gmail.com',
-        role: 'developer'
-      },
-      {
-        id: 1,
-        name: 'Haris',
-        email: 'haris@gmail.com',
-        role: 'developer'
-      },
-      {
-        id: 1,
-        name: 'Niaomi',
-        email: 'naiomi@gmail.com',
-        role: 'Project Manager'
-      }
-    ]
-  };
+  const res = await
+  post('/getUsersForProject', { projectId });
+  return res;
 };
 
 const getAllBugStats = async () => {

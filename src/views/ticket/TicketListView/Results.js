@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Results = ({
-  handleTicketClick, className, tickets, ...rest
+  completeTicket,
+  handleTicketClick,
+  className,
+  tickets,
+  ...rest
 }) => {
   const classes = useStyles();
 
@@ -85,7 +89,9 @@ const Results = ({
                       </TableCell>
                       <TableCell>
                         <Checkbox
-                          checked={ticket.completed}
+                          onClick={()=>{completeTicket(ticket.id)}}
+                          disabled={ticket.completed === 'true'}
+                          checked={ticket.completed === 'true'}
                         />
                       </TableCell>
                     </TableRow>
@@ -103,7 +109,8 @@ Results.propTypes = {
   className: PropTypes.string,
   tickets: PropTypes.array.isRequired,
   deleteticket: PropTypes.func,
-  handleTicketClick: PropTypes.func
+  handleTicketClick: PropTypes.func,
+  completeTicket: PropTypes.func
 };
 
 export default Results;

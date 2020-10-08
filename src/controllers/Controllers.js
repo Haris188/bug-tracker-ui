@@ -1,4 +1,4 @@
-import send from './send';
+import send from '../api/post';
 
 const signin = async (email, password) => {
   const postData = { email, password };
@@ -54,46 +54,28 @@ const deleteTicket = (ticketId) => {
   };
 };
 
-const addNewProject = (data) => {
-  // TODO: Make sure the api for this
-  // endpoing returns the project in data,
-  // if
-  // saving project is successful
-
-  return {
-    success: true,
-    data: {
-      id: '234',
-      name: 'bobi project',
-      description: 'A new project'
-    }
-  };
+const addNewProject = async (data) => {
+  const res = await
+  send('/addProject', data);
+  return res;
 };
 
-const addNewTicket = (data) => {
-  // TODO: Make sure the api for this
-  // endpoing returns the ticket in data,
-  // if
-  // saving ticket is successful
-
-  return {
-    success: true,
-    data: {
-      id: '234',
-      problem: 'No page openeing',
-      description: 'No description',
-      userId: '234',
-      projectId: '234',
-      completed: false
-    }
-  };
+const addNewTicket = async (data) => {
+  const res = await
+  send('/addTicket', data);
+  return res;
 };
 
-const assignUserToTicket = (data) => {
-  return {
-    success: true,
-    data: null
-  };
+const assignUserToTicket = async (data) => {
+  const res = await 
+  send('/setTicketUser', data);
+  return res;
+};
+
+const completeTicket = async (ticketId) => {
+  const res = await
+  send('/completeTicket', { ticketId });
+  return res;
 };
 
 export default {
@@ -106,5 +88,6 @@ export default {
   deleteTicket,
   addNewProject,
   addNewTicket,
-  assignUserToTicket
+  assignUserToTicket,
+  completeTicket
 };

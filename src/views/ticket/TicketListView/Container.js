@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { filter } from 'lodash';
 import WithAuthGate from 'src/components/WithAuthGate';
+import Controllers from 'src/controllers/Controllers';
 import View from './View';
 import LoadingView from '../../loadingView';
 import Presenters from '../../../presenters/Presenters';
@@ -15,7 +16,9 @@ const Container = (props) => {
   const { project } = location.state;
 
   const getTicketsFromApi = async () => {
-    const ticketResponse = await Presenters.getCurrentUserTickets(project.id);
+    const ticketResponse = await Presenters
+      .getCurrentUserTickets(project.id);
+
     if (ticketResponse.success) {
       setTickets(ticketResponse.data);
       setFilteredTickets(ticketResponse.data);
@@ -61,6 +64,15 @@ const Container = (props) => {
     navigate('/app/addticket', { state: { project } });
   };
 
+  const completeTicket = async (ticketId) => {
+    const res = await
+    Controllers.completeTicket(ticketId);
+
+    if (res && res.success) {
+      await getTicketsFromApi();
+    }
+  };
+
   return loading
     ? <LoadingView />
     : (
@@ -71,7 +83,8 @@ const Container = (props) => {
           searchName,
           handleTicketClick,
           project,
-          navigateToNewTicket
+          navigateToNewTicket,
+          completeTicket
         }}
       />
     );

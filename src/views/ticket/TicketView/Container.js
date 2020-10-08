@@ -25,7 +25,7 @@ const Container = (props) => {
 
   const getProjectUsersFromApi = async () => {
     const userRes = await
-    Presenters.getProjectUsersFromApi(ticket.projectId);
+    Presenters.getProjectUsersFromApi(ticket.projectid);
 
     if (userRes.success) {
       setUsers(userRes.data);
@@ -37,7 +37,7 @@ const Container = (props) => {
 
   const setAssignedUser = () => {
     if (users.length > 0) {
-      return find(users, { id: ticket.userId });
+      return find(users, { id: ticket.userid });
     }
   };
 
