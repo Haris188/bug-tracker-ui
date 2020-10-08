@@ -131,7 +131,6 @@ const TrafficByDevice = ({
                 variant="h2"
               >
                 {value}
-                %
               </Typography>
             </Box>
           ))}

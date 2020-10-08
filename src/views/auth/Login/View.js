@@ -14,8 +14,7 @@ import {
   Modal
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import { object } from 'prop-types';
-import Controllers from '../../../controllers/Controllers';
+import { object, func } from 'prop-types';
 import DemoUserSignIn from '../DemoUserSignIn';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginView = (props) => {
   const classes = useStyles();
-  const { model } = props;
+  const {
+    model
+  } = props;
 
   return (
     <Page
@@ -53,11 +54,7 @@ const LoginView = (props) => {
               password: Yup.string().max(255).required('Password is required')
             })}
             onSubmit={(values) => {
-              console.log('signin');
-              Controllers.signin(
-                values.email,
-                values.password
-              );
+              model.handleSignIn(values);
             }}
           >
             {({
@@ -147,7 +144,7 @@ const LoginView = (props) => {
                     open={model.open}
                     onClose={model.setDemoUserModalToClose}
                     style={{
-                      display:'flex',
+                      display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center'
                     }}

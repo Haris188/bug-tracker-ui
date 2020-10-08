@@ -7,9 +7,9 @@ import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
 
 const priorities = [
-  'High',
-  'Medium',
-  'Low'
+  'high',
+  'medium',
+  'low'
 ];
 
 const Container = () => {

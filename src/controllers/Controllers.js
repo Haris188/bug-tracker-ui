@@ -1,24 +1,22 @@
+import send from './send';
+
 const signin = async (email, password) => {
-  return {
-    success: true,
-    data: null
-  };
+  const postData = { email, password };
+  const res = await send('/login', postData);
+  return res;
 };
 
 const signup = async (data) => {
-  console.log(data);
-  return {
-    success: true,
-    data: null
-  };
+  const res = await send('/signup', data);
+  return res;
 };
 
 const deleteUser = async (id) => {
-  console.log(id);
-  return {
-    success: false,
-    data: null
-  };
+  const res = await send('/removeUser', {
+    deleteeId: id
+  });
+
+  return res;
 };
 
 const deleteProject = async (id) => {

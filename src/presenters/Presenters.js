@@ -1,35 +1,11 @@
 import { v4 as uuid } from 'uuid';
+import get from './get';
 
 const getAllUsers = async () => {
-  return {
-    success: true,
-    data: [
-      {
-        id: 1,
-        name: 'Haris',
-        email: 'haris@gmail.com',
-        role: 'developer'
-      },
-      {
-        id: 1,
-        name: 'Haris',
-        email: 'haris@gmail.com',
-        role: 'developer'
-      },
-      {
-        id: 1,
-        name: 'Haris',
-        email: 'haris@gmail.com',
-        role: 'developer'
-      },
-      {
-        id: 1,
-        name: 'Niaomi',
-        email: 'naiomi@gmail.com',
-        role: 'Project Manager'
-      }
-    ]
-  };
+  const res = await
+  get('/getAllUsers');
+
+  return res;
 };
 
 const getAllProjects = async () => {
@@ -165,7 +141,7 @@ const getProjectUsersFromApi = async (projectId) => {
     success: true,
     data: [
       {
-        id: "234",
+        id: '234',
         name: 'Haris',
         email: 'haris@gmail.com',
         role: 'developer'
@@ -193,33 +169,13 @@ const getProjectUsersFromApi = async (projectId) => {
 };
 
 const getAllBugStats = async () => {
-  return {
-    success: true,
-    data: {
-      fixed: 80,
-      notFixed: 20,
-      lowPriorityTickets: 30,
-      mediumPriorityTickets: 200,
-      highPriorityTickets: 130
-    }
-  };
+  const res = await get('/getTicketStats');
+  return res;
 };
 
 const getCurrentUser = async () => {
-  // TODO: Make sure to put loggenIn
-  // key in returned object, even if the user
-  // is not logged in
-
-  return {
-    success: true,
-    data: {
-      id: 1,
-      name: 'Haris',
-      email: 'haris@gmail.com',
-      role: 'admin',
-      loggedIn: true
-    }
-  };
+  const res = await get('/getCurrentUser');
+  return res;
 };
 
 export default {

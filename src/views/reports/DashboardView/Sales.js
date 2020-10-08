@@ -30,9 +30,9 @@ const Sales = ({
       {
         backgroundColor: colors.indigo[500],
         data: [
-          bugStats.lowPriorityTickets,
-          bugStats.mediumPriorityTickets,
-          bugStats.highPriorityTickets
+          bugStats.lowPr,
+          bugStats.mediumPr,
+          bugStats.highPr
         ],
         label: 'Tickets'
       }
