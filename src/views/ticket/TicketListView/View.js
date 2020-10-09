@@ -52,6 +52,7 @@ const View = (props) => {
             tickets={container.tickets}
             handleTicketClick={container.handleTicketClick}
             completeTicket={container.completeTicket}
+            currentUser={container.currentUser}
           />
         </Box>
       </Container>

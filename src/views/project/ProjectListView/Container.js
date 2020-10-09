@@ -4,20 +4,14 @@ import Controllers from 'src/controllers/Controllers';
 import Presenters from 'src/presenters/Presenters';
 import LoadingView from 'src/views/loadingView';
 import WithAuthGate from 'src/components/WithAuthGate';
+import { object } from 'prop-types';
 import View from './View';
 
-const dummyUser = {
-  currentUser: {
-    id: 1,
-    role: 'admin'
-  }
-};
-
-const Container = () => {
+const Container = (props) => {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { currentUser } = dummyUser;
+  const { currentUser } = props;
 
   const getProjectsFromApi = async () => {
     const projectsResult = await
@@ -72,6 +66,10 @@ const Container = () => {
         }}
       />
     );
+};
+
+Container.propTypes = {
+  currentUser: object
 };
 
 const ContainerGate = () => (

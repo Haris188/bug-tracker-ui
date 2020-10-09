@@ -25,6 +25,7 @@ const CommentsContainer = styled.div`
 
 const View = (props) => {
   const { container } = props;
+  const ticketCompleted = container.ticket.completed === 'true';
 
   return (
     <Card style={{ height: '100%' }}>
@@ -43,7 +44,7 @@ const View = (props) => {
             onChange={container.changeCommentValue}
             value={container.commentField}
             error={container.commentError}
-            disabled={container.addLoading}
+            disabled={container.addLoading || ticketCompleted}
           />
           {container.addLoading
             ? (
@@ -54,6 +55,7 @@ const View = (props) => {
             )
             : (
               <Button
+                disabled={ticketCompleted}
                 style={{ marginLeft: '0.4em' }}
                 variant="contained"
                 type="submit"

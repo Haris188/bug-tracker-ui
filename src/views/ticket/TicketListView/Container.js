@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { filter } from 'lodash';
 import WithAuthGate from 'src/components/WithAuthGate';
 import Controllers from 'src/controllers/Controllers';
+import { object } from 'prop-types';
 import View from './View';
 import LoadingView from '../../loadingView';
 import Presenters from '../../../presenters/Presenters';
@@ -14,6 +15,7 @@ const Container = (props) => {
   const [loading, setLoading] = useState(true);
   const [filteredTickets, setFilteredTickets] = useState([]);
   const { project } = location.state;
+  const { currentUser } = props;
 
   const getTicketsFromApi = async () => {
     const ticketResponse = await Presenters
@@ -84,10 +86,15 @@ const Container = (props) => {
           handleTicketClick,
           project,
           navigateToNewTicket,
-          completeTicket
+          completeTicket,
+          currentUser
         }}
       />
     );
+};
+
+Container.propTypes = {
+  currentUser: object
 };
 
 const ContainerGate = () => (

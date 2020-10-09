@@ -28,9 +28,19 @@ const Results = ({
   handleTicketClick,
   className,
   tickets,
+  currentUser,
   ...rest
 }) => {
   const classes = useStyles();
+
+  const checkDisabled = (ticket) => {
+    const res = (
+      ticket.completed === 'true'
+      || currentUser.role === 'developer'
+    );
+
+    return res;
+  };
 
   return (
     <Card
@@ -56,6 +66,9 @@ const Results = ({
                   <TableRow>
                     <TableCell>
                       Problem
+                    </TableCell>
+                    <TableCell>
+                      Priority
                     </TableCell>
                     <TableCell>
                       Description
@@ -85,12 +98,15 @@ const Results = ({
                         </Box>
                       </TableCell>
                       <TableCell>
+                        {ticket.priority}
+                      </TableCell>
+                      <TableCell>
                         {ticket.description}
                       </TableCell>
                       <TableCell>
                         <Checkbox
-                          onClick={()=>{completeTicket(ticket.id)}}
-                          disabled={ticket.completed === 'true'}
+                          onClick={() => { completeTicket(ticket.id); }}
+                          disabled={checkDisabled(ticket)}
                           checked={ticket.completed === 'true'}
                         />
                       </TableCell>
@@ -110,7 +126,8 @@ Results.propTypes = {
   tickets: PropTypes.array.isRequired,
   deleteticket: PropTypes.func,
   handleTicketClick: PropTypes.func,
-  completeTicket: PropTypes.func
+  completeTicket: PropTypes.func,
+  currentUser: PropTypes.object
 };
 
 export default Results;

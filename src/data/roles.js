@@ -1,21 +1,21 @@
 export default [
   {
-    title: 'Admin',
+    title: 'admin',
     email: 'admin-demo@bug.com',
     password: 'anypass'
   },
   {
-    title: 'Tester',
+    title: 'tester',
     email: 'tester-demo@bug.com',
     password: 'anypass'
   },
   {
-    title: 'Project Manager',
+    title: 'projectManager',
     email: 'projectManager-demo@bug.com',
     password: 'anypass'
   },
   {
-    title: 'Developer',
+    title: 'developer',
     email: 'developer-demo@bug.com',
     password: 'anypass'
   }

@@ -16,7 +16,7 @@ const Model = (props) => {
         name: values.firstName,
         email: values.email,
         password: values.password,
-        role: roles[values.role].title.toLowerCase()
+        role: roles[values.role].title
       },
       userSpecificData: {}
     });

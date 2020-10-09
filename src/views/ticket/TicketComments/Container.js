@@ -16,7 +16,7 @@ const Container = (props) => {
   const getCommentsFromApi = async () => {
     const commentRes = await
     Presenters.getCommentsForTicket(ticket.id);
-
+    console.log(commentRes);
     if (commentRes.success) {
       setComments(commentRes.data);
     }
@@ -69,7 +69,8 @@ const Container = (props) => {
           commentField,
           submitComment,
           addLoading,
-          commentError
+          commentError,
+          ticket
         }}
       />
     );

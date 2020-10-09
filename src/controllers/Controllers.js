@@ -1,9 +1,12 @@
+import get from 'src/api/get';
 import send from '../api/post';
 
 const signin = async (email, password) => {
   const postData = { email, password };
   const res = await send('/login', postData);
-  return res;
+  return res.success && res.data
+    ? res
+    : { success: res.data, data: null };
 };
 
 const signup = async (data) => {
@@ -28,23 +31,15 @@ const deleteProject = async (id) => {
 };
 
 const attachImgToTicket = async (formData) => {
-  return {
-    success: true,
-    data: null
-  };
+  const res = await
+  send('/fileupload', formData);
+  return res;
 };
 
-const addCommentToTicket = (commentData) => {
-  // TODO:
-  // Change server boundary for comments
-  // so that we dont have to provide
-  // userid from here. Make passport
-  // provide userId to interactor
-
-  return {
-    success: true,
-    data: null
-  };
+const addCommentToTicket = async (commentData) => {
+  const res = await
+  send('/addCommentToTicket', commentData);
+  return res;
 };
 
 const deleteTicket = (ticketId) => {
@@ -67,7 +62,7 @@ const addNewTicket = async (data) => {
 };
 
 const assignUserToTicket = async (data) => {
-  const res = await 
+  const res = await
   send('/setTicketUser', data);
   return res;
 };
@@ -77,6 +72,12 @@ const completeTicket = async (ticketId) => {
   send('/completeTicket', { ticketId });
   return res;
 };
+
+const logout = async ()=>{
+  const res = await
+  get('/logout');
+  return res;
+}
 
 export default {
   signin,
@@ -89,5 +90,6 @@ export default {
   addNewProject,
   addNewTicket,
   assignUserToTicket,
-  completeTicket
+  completeTicket,
+  logout
 };

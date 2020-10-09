@@ -28,6 +28,7 @@ const View = (props) => {
             submitForm={container.changeTicketUser}
             initialUser={container.currentlyAssingedUser}
             newUserSubmitLoading={container.newUserSubmitLoading}
+            currentUser={container.currentUser}
           />
         </Grid>
         <Grid item xs={12} md={6}>

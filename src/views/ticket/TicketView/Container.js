@@ -6,6 +6,7 @@ import LoadingView from 'src/views/loadingView';
 import { find } from 'lodash';
 import WithAuthGate from 'src/components/WithAuthGate';
 import View from './View';
+import { object } from 'prop-types';
 
 const dummyUser = {
   currentUser: {
@@ -18,7 +19,7 @@ const Container = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { ticket } = location.state;
-  const { currentUser } = dummyUser;
+  const { currentUser } = props;
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [newUserSubmitLoading, setNewUserSubmitLoading] = useState(false);
@@ -96,6 +97,10 @@ const Container = (props) => {
         }}
       />
     );
+};
+
+Container.protTypes = {
+  currentUser: object
 };
 
 const ContainerGate = () => (

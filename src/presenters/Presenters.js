@@ -21,17 +21,18 @@ const getCurrentUserTickets = async (projectId) => {
   return res;
 };
 
-const getImagesForTicket = async (id) => {
-  console.log(id);
-  return {
-    success: true,
-    data: [
-      'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
-      'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
-      'https://homepages.cae.wisc.edu/~ece533/images/boat.png',
-      'https://homepages.cae.wisc.edu/~ece533/images/boat.png'
-    ]
-  };
+const getImagesForTicket = async (ticketId) => {
+  const res = await
+  post('/getTicketAttachments', { ticketId });
+
+  if (res.success) {
+    const urlArr = res.success
+    && res.data.map((i) => (i.url));
+
+    res.data = urlArr;
+  }
+
+  return res;
 };
 
 const getCommentsForTicket = async (ticketId) => {

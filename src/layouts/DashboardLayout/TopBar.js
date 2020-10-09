@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -15,6 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from 'src/components/Logo';
+import Controllers from 'src/controllers/Controllers';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -31,6 +32,18 @@ const TopBar = ({
 }) => {
   const classes = useStyles();
   const [notifications] = useState([]);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const res = await
+    Controllers.logout();
+
+    if (res.success) {
+      navigate('/');
+    } else {
+      alert('Logout failed');
+    }
+  };
 
   return (
     <AppBar
@@ -43,20 +56,12 @@ const TopBar = ({
           <Logo />
         </RouterLink>
         <Box flexGrow={1} />
-        <Hidden mdDown>
-          <IconButton color="inherit">
-            <Badge
-              badgeContent={notifications.length}
-              color="primary"
-              variant="dot"
-            >
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <IconButton color="inherit">
-            <InputIcon />
-          </IconButton>
-        </Hidden>
+        <IconButton
+          color="inherit"
+          onClick={handleLogout}
+        >
+          <InputIcon />
+        </IconButton>
         <Hidden lgUp>
           <IconButton
             color="inherit"

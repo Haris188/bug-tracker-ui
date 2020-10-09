@@ -16,10 +16,18 @@ const TicketInfo = (props) => {
     submitForm,
     users,
     initialUser,
-    newUserSubmitLoading
+    newUserSubmitLoading,
+    currentUser
   } = props;
 
-  console.log(ticket);
+  console.log(currentUser)
+
+  const checkDisabled = () => (
+    currentUser.role === 'developer'
+    || currentUser.role === 'tester'
+    || ticket.completed === 'true'
+  );
+
   return (
     <Card style={{ height: '100%' }}>
       <CardContent>
@@ -44,7 +52,7 @@ const TicketInfo = (props) => {
             />
             <LabelGroup
               title="Completed"
-              label={ticket.completed ? 'Yes' : 'No'}
+              label={ticket.completed === 'true' ? 'Yes' : 'No'}
             />
           </Grid>
         </Grid>
@@ -82,6 +90,7 @@ const TicketInfo = (props) => {
               <TextField
                 select
                 fullWidth
+                disabled={checkDisabled()}
                 onChange={handleChange}
                 error={Boolean(touched.user && errors.user)}
                 helperText={touched.user && errors.user}
@@ -135,7 +144,8 @@ TicketInfo.propTypes = {
   submitForm: func,
   users: object,
   initialUser: object,
-  newUserSubmitLoading: bool
+  newUserSubmitLoading: bool,
+  currentUser: object
 };
 
 export default TicketInfo;

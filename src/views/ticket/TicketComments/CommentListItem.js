@@ -14,11 +14,11 @@ const CommentListItem = (props) => {
   return (
     <ListItem>
       <ListItemAvatar>
-        <Avatar>{comment.userName[0]}</Avatar>
+        <Avatar>{comment.username[0]}</Avatar>
       </ListItemAvatar>
       <ListItemText>
         <LabelGroup
-          title={comment.userName}
+          title={comment.username}
           label={comment.text}
         />
       </ListItemText>

@@ -67,15 +67,6 @@ const ProjectListItem = (props) => {
           {project.description}
         </Typography>
       </ListItemText>
-      <HideMobile>
-        <ListItemSecondaryAction>
-          <IconButton
-            onClick={() => { deleteProject(project.id); }}
-          >
-            <Delete />
-          </IconButton>
-        </ListItemSecondaryAction>
-      </HideMobile>
     </ListItem>
   );
 };
