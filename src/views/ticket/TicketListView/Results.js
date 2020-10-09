@@ -91,6 +91,7 @@ const Results = ({
                         >
                           <Link
                             variant="body1"
+                            component="button"
                             onClick={() => { handleTicketClick(ticket); }}
                           >
                             {ticket.problem}

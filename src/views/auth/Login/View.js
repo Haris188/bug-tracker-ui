@@ -120,6 +120,18 @@ const LoginView = (props) => {
                     Sign in now
                   </Button>
                 </Box>
+                <Box my={2}>
+                  <Button
+                    color="primary"
+                    disabled={isSubmitting}
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                    onClick={model.setDemoUserModalToOpen}
+                  >
+                    Sign in as Demo User
+                  </Button>
+                </Box>
                 <Typography
                   color="textSecondary"
                   variant="body1"
@@ -132,13 +144,6 @@ const LoginView = (props) => {
                     variant="h6"
                   >
                     Sign up
-                  </Link>
-                  {' Or '}
-                  <Link
-                    variant="h6"
-                    onClick={model.setDemoUserModalToOpen}
-                  >
-                    Sign in as demo user
                   </Link>
                   <Modal
                     open={model.open}

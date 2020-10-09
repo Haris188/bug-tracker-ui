@@ -16,6 +16,7 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from 'src/components/Logo';
 import Controllers from 'src/controllers/Controllers';
+import zIndex from '@material-ui/core/styles/zIndex';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -52,7 +53,7 @@ const TopBar = ({
       {...rest}
     >
       <Toolbar>
-        <RouterLink to="/">
+        <RouterLink to="/app/dashboard">
           <Logo />
         </RouterLink>
         <Box flexGrow={1} />
